@@ -39,6 +39,7 @@ export default {
         this.secondForm = true;
 
         this.codeInputs = document.querySelectorAll('.form__code')
+        this.tipText = "Введите код, отправленный вам на почту"
         await this.$nextTick(() => this.codeInputs[this.codeInputActive].focus())
       }
     },
@@ -99,7 +100,7 @@ export default {
       </form>
       <div class="content__tip">
         <img src="../../assets/icons/info.png" alt=""/>
-        <span class="tip__text">{{ this.tipText }}</span>
+        <span class="tip__text">{{tipText}}</span>
       </div>
     </div>
   </div>
