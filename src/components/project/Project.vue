@@ -9,6 +9,6 @@ import Header from "../blocks/header/Header.vue";
 <template>
   <div class="wrapper">
     <Header full />
-    {{domain}}
+    {{ domain }}
   </div>
 </template>
