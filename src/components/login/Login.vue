@@ -98,7 +98,7 @@ export default {
         </div>
       </form>
       <div class="content__tip">
-        <img src={info} alt=""/>
+        <img src="../../assets/icons/info.png" alt=""/>
         <span class="tip__text">{{ this.tipText }}</span>
       </div>
     </div>
