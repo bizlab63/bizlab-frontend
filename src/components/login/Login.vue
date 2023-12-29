@@ -99,7 +99,7 @@ export default {
         </div>
       </form>
       <div class="content__tip">
-        <img src="../../assets/icons/info.png" alt=""/>
+        <img class="tip__icon" src="../../assets/icons/info.png" alt=""/>
         <span class="tip__text">{{tipText}}</span>
       </div>
     </div>
@@ -151,6 +151,7 @@ export default {
 }
 
 .form__code {
+  background: #F5FCFB;
   font-family: 'Montserrat', sans-serif;
   border-radius: 0;
   border-bottom: 1px solid grey;
@@ -175,6 +176,11 @@ export default {
   margin-top: 40px;
   border-radius: 10px;
   transition: 1s;
+}
+
+.tip__icon{
+  width: 28px;
+  height: 28px;
 }
 
 .tip__text {

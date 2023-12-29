@@ -1,6 +1,7 @@
 <script setup>
 import Header from "../blocks/header/Header.vue";
 import Project from "../blocks/project/Project.vue";
+import CreateProject from "../blocks/project/CreateProject.vue";
 </script>
 
 <script>
@@ -16,6 +17,7 @@ export default {
       token: "",
       projects: null,
       isProjectsEmpty: false,
+      creating: false,
     }
   },
   created() {
@@ -37,7 +39,7 @@ export default {
       formData.append('uid', this.uid)
       formData.append('token', this.token)
 
-      this.projects = await fetch(backendUrl + '/api/company/all', {
+      this.projects = await fetch(backendUrl + '/api/project/all', {
         method: 'POST',
         body: formData
       }).then(res => {
@@ -47,6 +49,11 @@ export default {
       if (this.projects.length === 0) {
         this.isProjectsEmpty = true
       }
+    },
+
+    startCreating() {
+      this.creating = !this.creating
+      this.isProjectsEmpty = !this.isProjectsEmpty;
     }
   }
 }
@@ -58,21 +65,17 @@ export default {
     <div class="content">
       <h1 class="content__heading">Главная</h1>
       <h3 class="content__subheading">Ваши проекты</h3>
-      <div class="content__empty" v-if="isProjectsEmpty">
+      <div class="content__empty" v-show="isProjectsEmpty">
         <div class="empty__tip">
           <img src="../../assets/icons/info.png" alt="" class="tip__icon">
           <span class="tip__text">У вас нет ни одного проекта, но вы можете с лёгкостью создать и настроить его, прямо на этой странице!</span>
         </div>
-        <router-link to="/system/create_project" class="empty__link">Создать проект</router-link>
+        <button class="empty__link" @click="startCreating">Создать проект</button>
       </div>
-      <div class="content__projects" v-else>
+      <div class="content__projects" v-show="!isProjectsEmpty">
         <Project v-for="project in projects" :key="project.id" :name="project.name" :domain="project.domain" />
+        <CreateProject />
       </div>
-      <router-link to="/system/create_project" v-if="!isProjectsEmpty">
-        <div class="content__button">
-          <img src="../../assets/icons/add.png" class="button__icon" alt="">
-        </div>
-      </router-link>
     </div>
   </div>
 
@@ -100,7 +103,7 @@ export default {
   margin-top: 32px;
   display: grid;
   grid-template-columns: 100%;
-  grid-auto-rows: 90px;
+  grid-auto-rows: 120px;
   column-gap: 5%;
   row-gap: 3vh;
 }
@@ -147,24 +150,7 @@ export default {
   border-radius: 10px;
   margin: 0 auto;
   color: #fff;
+  border: 0;
   background: rgba(14, 193, 172, 0.8);
-}
-
-.content__button {
-  margin: 0 auto;
-  margin-top: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 25px rgba(0, 51, 153, 0.05);
-  width: 40px;
-  background: #fff;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button__icon {
-  width: 28px;
-  height: 28px;
 }
 </style>

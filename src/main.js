@@ -11,7 +11,8 @@ import Project from "./components/project/Project.vue";
 const routes = [
     { path: "/", component: Account },
     { path: "/login", component: Login },
-    { path: "/:domain", component: Project, props: true }
+    { path: "/:domain", component: Project, props: true },
+    { path: "/:domain/:section", component: Project, props: true },
 ]
 
 const router = createRouter({

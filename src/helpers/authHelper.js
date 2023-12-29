@@ -20,3 +20,10 @@ export function checkAuthentication (router) {
         return false;
     }
 }
+
+export function logout() {
+    document.cookie = "uid="
+    document.cookie = "token="
+
+    location.reload()
+}
